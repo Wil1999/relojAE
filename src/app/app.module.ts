@@ -7,11 +7,13 @@ import { LoginComponent } from './login/login.component';
 
 // Importando Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     FontAwesomeModule,
