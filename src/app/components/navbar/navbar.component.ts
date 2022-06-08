@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { isEmpty } from 'rxjs-compat/operator/isEmpty';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,11 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 export class NavbarComponent implements OnInit {
   declare private listTitles: any[];
   declare location: Location;
-   private mobile_menu_visible: number = 0;
+    mobile_menu_visible: number = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+
+
   constructor(location: Location,private element: ElementRef, private router: Router) {
     this.location = location;
           this.sidebarVisible = false;
@@ -56,6 +59,7 @@ sidebarToggle() {
   // const toggleButton = this.toggleButton;
   // const body = document.getElementsByTagName('body')[0];
   var $toggle = document.getElementsByClassName('navbar-toggler')[0];
+  var $layer: any = document.getElementsByClassName('close-layer')[0];
 
   if (this.sidebarVisible === false) {
       this.sidebarOpen();
@@ -67,6 +71,7 @@ sidebarToggle() {
   if (this.mobile_menu_visible == 1) {
       // $('html').removeClass('nav-open');
       body.classList.remove('nav-open');
+
       if ($layer) {
           $layer.remove();
       }
@@ -80,7 +85,7 @@ sidebarToggle() {
           $toggle.classList.add('toggled');
       }, 430);
 
-      var $layer = document.createElement('div');
+      $layer = document.createElement('div');
       $layer.setAttribute('class', 'close-layer');
 
 
@@ -96,7 +101,8 @@ sidebarToggle() {
 
       $layer.onclick = function() { //asign a function
         body.classList.remove('nav-open');
-        this.mobile_menu_visible = 0;
+        //mobile_menu_visible = 0;
+        var mobile_menu_visible = 0;
         $layer.classList.remove('visible');
         setTimeout(function() {
             $layer.remove();
